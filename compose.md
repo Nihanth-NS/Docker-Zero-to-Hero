@@ -1,28 +1,31 @@
-What is Docker Compose?
-Docker Compose is a tool used to manage and run multiple containers on a single machine using one YAML file (docker-compose.yml).
-It is especially useful for working with multiple microservices during local development.
-Instead of manually running build/run commands for every update, developers can simply use:
-  docker-compose up
-  docker-compose down
-Used For
-  Local development
-  Application testing
-  Running small applications on a single host
+# What is Docker Compose?
+  - Docker Compose is a tool used to manage and run multiple containers on a single machine using one YAML file (compose.yml).
+  - It is especially useful for working with multiple microservices during local development.
+  - Instead of manually running build/run commands for every update, developers can simply use:
+    ```
+    docker-compose up
+    docker-compose down
+    ```
+  # Used For:
+    1 Local development
+    2 Application testing
+    3 Running small applications on a single host
 
-- How docker swarm is different from docker compose.
-  Docker swarm and docker compose are total different
-         docker compose is only used to build and run the images in a single host by using single yaml file(docker-compose.yml)
-         docker swarm is where it will handle containers accross multiple hosts as a cluster.
-     To simply put:
-        DOCKER-COMPOSE: One Machine Orchestration
-         A tool that manages multiple containers on one host using a YAML file. Ideal for local development and testing.
-        Docker-swarm: Many Machines Orchestration
-         Docker’s built‑in orchestrator that manages containers across many hosts, providing scaling, load balancing, and high availability.
+ ## How docker swarm is different from docker compose.
+  - Docker swarm and docker compose are total different
+   ```
+     - docker compose is only used to build and run the images in a single host by using single yaml file(docker-compose.yml)
+     - docker swarm is where it will handle containers accross multiple hosts as a cluster.
+   ```
+  #### To simply put:
+        . DOCKER-COMPOSE: One Machine Orchestration
+            A tool that manages multiple containers on one host using a YAML file. Ideal for local development and testing.
+        . Docker-swarm: Many Machines Orchestration
+            Docker’s built‑in orchestrator that manages containers across many hosts, providing scaling, load balancing, and high availability.
 
-
-3‑Tier Architecture Using Docker Compose
-nginx + nodejs + redis
-Repository: https://github.com/Nihanth-NS/awesome-compose/tree/master/nginx-nodejs-redis
+## Explanation using the project: 3‑Tier Architecture Using Docker Compose nginx + nodejs + redis
+   (Repository: https://github.com/Nihanth-NS/awesome-compose/tree/master/nginx-nodejs-redis)
+   
 Project Overview
 This project demonstrates a simple 3‑tier architecture:
 
