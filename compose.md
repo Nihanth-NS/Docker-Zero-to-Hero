@@ -24,73 +24,76 @@
             Docker’s built‑in orchestrator that manages containers across many hosts, providing scaling, load balancing, and high availability.
 
 ## Explanation using the project: 3‑Tier Architecture Using Docker Compose nginx + nodejs + redis
-   (Repository: https://github.com/Nihanth-NS/awesome-compose/tree/master/nginx-nodejs-redis)
+   Check out this repo:- https://github.com/docker/awesome-compose/tree/master/nginx-nodejs-redis
    
-Project Overview
-This project demonstrates a simple 3‑tier architecture:
-
+  ### Project Overview
+      - This project demonstrates a simple 3‑tier architecture:
+```
 NGINX → Frontend (Reverse Proxy / Load Balancer)
 Node.js → Backend
 Redis → Data layer (stores request count)
-
+```
 When the user loads the page, the app displays:
 
-The number of times the page has been requested
-The backend container that served the request
+  - The number of times the page has been requested
+  - The backend container that served the request
 
 
-Project Structure
-nginx-nodejs-redis
-│
-├── compose.yml
-│
-├── web
-│   ├── server.js
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── Dockerfile
-│   └── .gitignore
-│
-└── nginx
-    ├── Dockerfile
-    └── nginx.conf
+  ### Project Structure
+            nginx-nodejs-redis
+            │
+            ├── compose.yml
+            │
+            ├── web
+            │   ├── server.js
+            │   ├── package.json
+            │   ├── package-lock.json
+            │   ├── Dockerfile
+            │   └── .gitignore
+            │
+            └── nginx
+                ├── Dockerfile
+                └── nginx.conf
 
 
-Component Details
-NGINX
-nginx.conf
-
+### Component Details
+#### NGINX
+**nginx.conf**
+```
 Listens on port 80
 Forwards incoming requests to the backend on port 5000
 Acts as a reverse proxy
 Performs load balancing between web1 and web2
-
-Dockerfile
+```
+**Dockerfile**
+```
 Builds the NGINX image used in docker-compose.
-
-Web (Node.js Backend)
-server.js
-
+```
+#### Web (Node.js Backend)
+**server.js**
+```
 Main backend logic
 Connects to Redis
 Increments request count
 Runs on port 5000
-
-package.json
-
+```
+**package.json**
+```
 Defines dependencies
 Contains project metadata
 Specifies how the app starts
-
-package-lock.json
+```
+**package-lock.json**
+```
   Locks exact dependency versions
-
-Dockerfile
+```
+**Dockerfile**
+```
     Builds the Node.js application image
+```
 
-
-Docker Compose File
-
+#### Docker Compose File
+```
 services:
   redis:
     image: 'redislabs/redismod'
@@ -118,29 +121,31 @@ services:
     depends_on:
       - web1
       - web2
-
-
+```
+```
 redis → Runs using redislabs/redismod
 web1 / web2 → Node.js backend containers
 nginx → Accessible on port 8080
 depends_on ensures NGINX starts only after both web containers are running
-
-Commands
+```
+### Commands for compose:
+```
 Start all containers:
    docker-compose up
 Stop and remove all containers:
    docker-compose down 
 Access the application:
    http://PUBLIC-IP:8080
+```
 
+## Port Mapping:
+When running applications inside containers, users cannot directly access internal container ports.<br>
+So port mapping is used to connect with the internal containers<br>
+### Format: <br>
+ **HOST_PORT : CONTAINER_PORT** <br>
+<img width="419" height="371" alt="{8D3B6DA9-FC3B-408E-9473-031DDDE69661}" src="https://github.com/user-attachments/assets/c9448c33-953f-47db-8b0f-3a2aa03a84a8" />
 
-Port Mapping:
-When running applications inside containers, users cannot directly access internal container ports.
-So port mapping is used:
-HOST_PORT : CONTAINER_PORT
-
-Example
-If Jenkins runs inside the container on port 8080, map it like this:
-  docker run -p 6767:8080 <image-name>
-Now the application is accessible at:
-http://PUBLIC-IP:6767
+### Example:
+If Jenkins runs inside the container on port 8080, map it like this:<br>
+  **docker run -p 6767:8080 <image-name>**<br>
+Now the application is accessible at: **http://PUBLIC-IP:6767**
